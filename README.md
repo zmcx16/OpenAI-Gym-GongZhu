@@ -46,7 +46,7 @@ python run_example.py
 4.  env send PlayTrick event to the player, the player choose a card and send PlayTrick_Action event to env.
 5.  env will send ShowTrickAction event to all players to tell them the player's action.
 6.  After all players take a card, env will send ShowTrickEnd event to tell the players that which one win this trick.
-7.  After last trick, env will send RoundEnd event to announce which player win this round, if the loser's score > max_score, env send GameOver event to all players and exit the game, or send NewRound event to all players to continue game.
+7.  After last trick, env will send RoundEnd event to announce which player win this round, if the loser's score < min_score, env send GameOver event to all players and exit the game, or send NewRound event to all players to continue game.
 
 # API
 * GameStart

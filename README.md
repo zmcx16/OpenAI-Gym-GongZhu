@@ -27,14 +27,16 @@ python run_example.py
 * The J♦ (goat) is worth +100 points
 * The 10♣ (transformer) counts as zero points, but doubles your points at the end of a round and adds it to your accumulated points. If at the end of a round, a player has the 10 of clubs and no other point cards, the 10 of clubs is worth +50 points.
 * The Hearts are worth -200 points in total:
-   Ace -50 points
-   King -40 points
-   Queen -30 points
-   Jack -20 points
-   10 through 5 are worth -10 ~ -5 points respectively.
-   4 -10 points
-   3 -3 points
-   2 -2 points
+```
+Ace -50 points
+King -40 points
+Queen -30 points
+Jack -20 points
+10 through 5 are worth -10 ~ -5 points respectively.
+4 -10 points
+3 -3 points
+2 -2 points
+```
 * All other cards are worth 0 points and do not play a part in scoring.
 * Shot the moon(全紅&豬羊變色): If you get all the hearts, you have shot the moon and are awarded +200 points(all Hearts become positive points), and J♦ (goat) become -100 points, Q♠ (pig) become 100 points(豬羊變色).
 * Grand Slam(大滿貫): If you get all the points cards(All Hearts, goat, pig and transformer), all scores are into positive points, you can get（200 + 100 + 100）* 2 = +800 points.

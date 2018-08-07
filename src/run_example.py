@@ -1,11 +1,11 @@
 import gym
 
-from Hearts import *
+from GongZhu import *
 from Agent.human import Human
 from Agent.randomAI import RandomAI
 
 NUM_EPISODES = 10
-MAX_SCORE = 100
+MIN_SCORE = -1000
 
 playersNameList = ['Kazuma', 'Aqua', 'Megumin', 'Darkness']
 agent_list = [0, 0, 0, 0]
@@ -18,6 +18,7 @@ agent_list[2] = RandomAI(playersNameList[2], {'print_info': False})
 agent_list[3] = RandomAI(playersNameList[3], {'print_info': False})
 """
 
+
 # Random play
 agent_list[0] = RandomAI(playersNameList[0], {'print_info': True})
 agent_list[1] = RandomAI(playersNameList[1], {'print_info': True})
@@ -25,8 +26,8 @@ agent_list[2] = RandomAI(playersNameList[2], {'print_info': True})
 agent_list[3] = RandomAI(playersNameList[3], {'print_info': True})
 
 
-env = gym.make('Hearts_Card_Game-v0')
-env.__init__(playersNameList, MAX_SCORE)
+env = gym.make('GongZhu_Card_Game-v0')
+env.__init__(playersNameList, MIN_SCORE)
 
 for i_episode in range(NUM_EPISODES):
     

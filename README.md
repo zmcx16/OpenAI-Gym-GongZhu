@@ -16,25 +16,28 @@ python run_example.py
 * Random 
 
 # Description
-* Use a deck of cards to play (Not Support 拱雙豬).
-* All players start with 0 points. The first person go past -1000 points then game over. The player which get highest points is the game winner.
+* Use one deck of cards to play (Not Support 拱雙豬).
+* Players take turns to play a card in an counterclockwise direction and whoever produces the card of the largest value in the same suit collects all four cards and becomes the next dealer.
 * Any card can be played during the first trick.
+* All players start with 0 points. The first person go past -1000 points then game over. The player which get highest points is the game winner.
 * (Exposure cards function is not implement yet.)
 
 # Scoring
-* The J♦ (goat) is worth +100 points
 * The Q♠ (pig) is worth -100 points
-* The 10♣ (transformer) counts as zero points, but doubles your points at the end of a round and adds it to your accumulated points. If at the end of a round, a player has the 10 of clubs and no other point cards, the 10 of clubs is worth +50 points (or +100 if exposed: see below).
+* The J♦ (goat) is worth +100 points
+* The 10♣ (transformer) counts as zero points, but doubles your points at the end of a round and adds it to your accumulated points. If at the end of a round, a player has the 10 of clubs and no other point cards, the 10 of clubs is worth +50 points.
 * The Hearts are worth -200 points in total:
    Ace -50 points
    King -40 points
    Queen -30 points
    Jack -20 points
-   10 through 5 are worth -10 points
-   4 through 2 are worth no points
+   10 through 5 are worth -10 ~ -5 points respectively.
+   4 -10 points
+   3 -3 points
+   2 -2 points
 * All other cards are worth 0 points and do not play a part in scoring.
-* Shot the moon: If you get all the hearts, you have shot the moon and are awarded +200 points.
-* etc...
+* Shot the moon(全紅&豬羊變色): If you get all the hearts, you have shot the moon and are awarded +200 points(all Hearts become positive points), and J♦ (goat) become -100 points, Q♠ (pig) become -100 points(豬羊變色).
+* Grand Slam(大滿貫): If you get all the points cards(All Hearts, goat, pig and transformer), all scores are into positive points, you can get（200 + 100 + 100）* 2 = +800 points.
 
 # Game Flow
 1.	env.reset() -> Start Hearts game, env send the GameStart event to all player.
@@ -111,7 +114,6 @@ python run_example.py
             {'playerName': 'Darkness'
             ,'card': '7s'}
 		],
-		'IsHeartsBroken': False
     }
 
 }
@@ -144,7 +146,6 @@ python run_example.py
             {'playerName': 'Darkness'
             ,'card': '7s'}
 		],
-        'IsHeartsBroken': False
     }
 }
 ```
@@ -158,7 +159,6 @@ python run_example.py
         'trickNum': 3,
         'trickWinner': 'Megumin',
         'cards': ['3s', '2s', '9s', '7s'],
-		'IsHeartsBroken': False
     }
 }
 ```
@@ -171,16 +171,25 @@ python run_example.py
     "data" : {
         "players" : [
             {'playerName': 'Kazuma'
-            ,'score': 10},
+            ,'roundCard': ['Jh', '7h', 'Th', '2c', 'Jd', '4d', '6d', '8d', 'Kh', '3h', 'Qh', 'Js', 'Ad', '4h', '3s', '2d', '9s', '8s', '4s', '2s']
+            ,'roundScore': -20
+            ,'score': -495},
             {'playerName': 'Aqua'
-            ,'score': 13},
+            ,'roundCard': ['Jc', 'Kc', '6c', 'Qc', '8c', 'Tc', '9c', '5c', '7d', '7c', '3c', '4c', '8h', 'Ah', '9h', 'Qd', '7s', 'Ac', 'Ks', 'As', 'Td', '6h', '5h', '9d']
+            ,'roundScore': -156
+            ,'score': -318},
             {'playerName': 'Megumin'
-            ,'score': 3},
+            ,'roundCard': ['Ts', '6s', 'Qs', '5s']
+            ,'roundScore': -100
+            ,'score': -1009},
             {'playerName': 'Darkness'
-            ,'score': 0}
+            ,'roundCard': ['5d', '3d', '2h', 'Kd']
+            ,'roundScore': -2
+            ,'score': -827},
         ],
 		'ShootingMoon': False,
-        'Round': 3
+        'GrandSlam': False,
+        'Round': 10
     }
 }
 ```
@@ -193,16 +202,16 @@ python run_example.py
     "data" : {
         "players" : [
             {'playerName': 'Kazuma'
-            ,'score': 0},
+            ,'score': -495},
             {'playerName': 'Aqua'
-            ,'score': 120},
+            ,'score': -318},
             {'playerName': 'Megumin'
-            ,'score': 36},
+            ,'score': -1009},
             {'playerName': 'Darkness'
-            ,'score': 26}
+            ,'score': -827}
         ],
-        'Round': 7,
-        'Winner': 'Kazuma'
+        'Round': 10,
+        'Winner': 'Aqua'
     }
 }
 ```

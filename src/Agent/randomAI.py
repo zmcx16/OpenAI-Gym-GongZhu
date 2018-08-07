@@ -18,23 +18,6 @@ class RandomAI:
         elif observation['event_name'] == 'NewRound':
             if self.print_info:
                 print(observation)
-        elif observation['event_name'] == 'PassCards':
-            if self.print_info:
-                print(observation)
-            
-            passCards = random.sample(observation['data']['hand'],3)
-            
-            if self.print_info:
-                print(self.name, ' pass cards: ', passCards)
-                
-            return {
-                    "event_name" : "PassCards_Action",
-                    "data" : {
-                        'playerName': self.name, 
-                        'action': {'passCards': passCards}
-                    }
-                }
-        
         elif observation['event_name'] == 'ShowPlayerHand':
             if self.print_info:
                 print(observation)
@@ -43,13 +26,9 @@ class RandomAI:
             if self.print_info:
                 print(observation)
             
-            hand = observation['data']['hand']
-            if '2c' in hand:
-                choose_card = '2c'
-            else:
-                choose_card = random.choice(observation['data']['hand'])
-                if self.print_info:
-                    print(self.name, ' choose card: ', choose_card)
+            choose_card = random.choice(observation['data']['hand'])
+            if self.print_info:
+                print(self.name, ' choose card: ', choose_card)
 
             return {
                     "event_name" : "PlayTrick_Action",

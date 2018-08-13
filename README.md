@@ -81,7 +81,8 @@ python run_example.py
             ,'score': 0},
             {'playerName': 'Darkness'
             ,'score': 0}
-        ]
+        ],
+        'Round': 10
     }
 }
 ```

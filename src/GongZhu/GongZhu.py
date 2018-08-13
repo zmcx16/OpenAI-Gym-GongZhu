@@ -231,6 +231,25 @@ class GongZhuEnv(Env):
             p.resetRoundCards()
             p.discardTricks()
 
+        self.event_data_for_client \
+        =   { "event_name" : self.event,
+                "broadcast" : True,
+                "data" : {
+                    "players" : [
+                       {'playerName': self.players[0].name,
+                        'score': self.players[0].score},
+                       {'playerName': self.players[1].name,
+                        'score': self.players[1].score},
+                       {'playerName': self.players[2].name,
+                        'score': self.players[2].score},
+                       {'playerName': self.players[3].name,
+                        'score': self.players[3].score},
+                       ],
+                    'Round': self.round,
+                }
+            }
+ 
+
         self.event = 'ShowPlayerHand'
         self.event_data_for_server = {'now_player_index': 0}        
 

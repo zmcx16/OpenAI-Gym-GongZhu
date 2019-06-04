@@ -8,13 +8,13 @@ import random
 from datetime import datetime
 from gym import Env
 
-'''
-Change auto to False if you would like to play the game manually.
-This allows you to make all passes, and plays for all four players.
-When auto is True, passing is disabled and the computer plays the
-game by "guess and check", randomly trying moves until it finds a
-valid one.
-'''
+
+'''Change auto to False if you would like to play the game manually.'''
+'''This allows you to make all passes, and plays for all four players.'''
+'''When auto is True, passing is disabled and the computer plays the'''
+'''game by "guess and check", randomly trying moves until it finds a'''
+'''valid one.'''
+
 
 totalTricks = 13
 
@@ -87,11 +87,11 @@ class GongZhuEnv(Env):
         hearts_score_list[king] = -40
         hearts_score_list[queen] = -30
         hearts_score_list[jack] = -20
-        hearts_score_list[4] = -10        
+        hearts_score_list[4] = -10
         
         # check shootingMoon and grandSlam
         for current_player_i in range(len(self.players)): 
-            heart_num = 0  
+            heart_num = 0
             for card in self.players[current_player_i].CardsInRound:        
                 if card.suit == Suit(hearts):
                     heart_num += 1
@@ -105,7 +105,7 @@ class GongZhuEnv(Env):
             if heart_num == 13:
                 self.shootingMoon = True
                 for i in range(len(hearts_score_list)):
-                    hearts_score_list[i] *= -1            
+                    hearts_score_list[i] *= -1
                 pig_score *= -1
                 goat_score *= -1
                 
@@ -114,10 +114,10 @@ class GongZhuEnv(Env):
                     goat_score *= -1    # all points card become positive.
                     
         
-        temp_score_list = [0, 0, 0, 0] 
-        for current_player_i in range(len(self.players)):     
-            hasTransformer = False   
-            for card in self.players[current_player_i].CardsInRound:        
+        temp_score_list = [0, 0, 0, 0]
+        for current_player_i in range(len(self.players)):
+            hasTransformer = False
+            for card in self.players[current_player_i].CardsInRound:
                 if card.suit == Suit(hearts):
                     temp_score_list[current_player_i] += hearts_score_list[card.rank.rank]
                 elif card == Card(queen, spades):
@@ -138,6 +138,7 @@ class GongZhuEnv(Env):
         
         return temp_score_list
     
+    @classmethod
     def _handsToStrList(self, hands):
         output = []
         for card in hands:
@@ -187,7 +188,7 @@ class GongZhuEnv(Env):
         trick_list = []
         for i, card in enumerate(self.currentTrick.trick):
             if self.currentTrick.trick[i] is not 0:
-                trick_list += [{'playerName': self.players[i].name, 'card': str(card) }]    
+                trick_list += [{'playerName': self.players[i].name, 'card': str(card) }]
         
         return trick_list
         
@@ -205,8 +206,8 @@ class GongZhuEnv(Env):
                    ]
                }
            }
-        
-        for p in self.players:        
+
+        for p in self.players:
             p.score = 0
         self.round = 0
     
@@ -251,7 +252,7 @@ class GongZhuEnv(Env):
  
 
         self.event = 'ShowPlayerHand'
-        self.event_data_for_server = {'now_player_index': 0}        
+        self.event_data_for_server = {'now_player_index': 0}
 
         self.renderInfo['printFlag'] = True
         self.renderInfo['Msg'] = '\n*** Start Round {0} ***\n'.format(self.round)
@@ -266,10 +267,10 @@ class GongZhuEnv(Env):
             =   {"event_name" : self.event,
                  "broadcast" : False,
                  "data" : {
-                     'playerName': self.players[now_player_index].name, 
+                     'playerName': self.players[now_player_index].name,
                      'hand': self._handsToStrList(sum(self.players[now_player_index].hand.hand, []))
                     }
-                }        
+                }
             self.event_data_for_server['now_player_index'] += 1
         
         else:
@@ -280,19 +281,19 @@ class GongZhuEnv(Env):
     def _event_PlayTrick(self):
                 
         shift = self.event_data_for_server['shift']
-        if self.trickNum == 0 and shift == 0:  
+        if self.trickNum == 0 and shift == 0:
             self._getFirstTrickStarter()
             current_player = self.players[self.trickWinner]
             
         else:
             current_player_i = (self.trickWinner + shift)%4
-            current_player = self.players[current_player_i] 
+            current_player = self.players[current_player_i]
             
         self.event_data_for_client \
         =   { "event_name" : self.event,
                 "broadcast" : False,
                 "data" : {
-                    'playerName': current_player.name, 
+                    'playerName': current_player.name,
                     'hand': self._handsToStrList(sum(current_player.hand.hand, [])),
                     'trickNum': self.trickNum+1,
                     'trickSuit': self.currentTrick.suit.__str__(),
@@ -331,7 +332,7 @@ class GongZhuEnv(Env):
         
         else:
             self.event = 'PlayTrick'
-            self._event_PlayTrick()             
+            self._event_PlayTrick()
             
     def _event_ShowTrickAction(self):
 
@@ -359,7 +360,7 @@ class GongZhuEnv(Env):
         
         cards = []
         for card in self.currentTrick.trick:
-            cards += [str(card)]         
+            cards += [str(card)]
                  
         self.event_data_for_client \
         =   { "event_name" : self.event,
@@ -378,7 +379,7 @@ class GongZhuEnv(Env):
         
         self.currentTrick = Trick()
              
-        self.trickNum += 1        
+        self.trickNum += 1
         if self.trickNum < 13:
             self.event = 'PlayTrick'
             self.event_data_for_server = {'shift': 0}
@@ -468,15 +469,15 @@ class GongZhuEnv(Env):
         for p in self.players:
             self.renderInfo['Msg'] += '{0}: {1}\n'.format(p.name, p.score)
         
-        self.renderInfo['Msg'] += '\nRound: {0}\n'.format(self.round)       
+        self.renderInfo['Msg'] += '\nRound: {0}\n'.format(self.round)
         self.renderInfo['Msg'] += 'Winner: {0}\n'.format(winner.name)
         
         self.event = None
 
     def reset(self):
         
-        # Generate a full deck of cards and shuffle it     
-        self.event = 'GameStart'        
+        # Generate a full deck of cards and shuffle it
+        self.event = 'GameStart'
         self._event_GameStart()
         observation = self.event_data_for_client
         self.event = 'NewRound'
@@ -502,13 +503,13 @@ class GongZhuEnv(Env):
         elif self.event == 'ShowPlayerHand':
             self._event_ShowPlayerHand()
 
-        elif self.event == 'PlayTrick' or self.event == 'ShowTrickAction' or self.event == 'ShowTrickEnd':          
+        elif self.event == 'PlayTrick' or self.event == 'ShowTrickAction' or self.event == 'ShowTrickEnd':
             if action_data != None and action_data['event_name'] == "PlayTrick_Action":
-                self._event_PlayTrick_Action(action_data)            
+                self._event_PlayTrick_Action(action_data)
             else:
                 if self.event == 'PlayTrick':
                     self._event_PlayTrick()
-                elif self.event == 'ShowTrickEnd':                    
+                elif self.event == 'ShowTrickEnd':
                     self._event_ShowTrickEnd()
         
         elif self.event == 'RoundEnd':
@@ -520,7 +521,7 @@ class GongZhuEnv(Env):
         elif self.event == None:
             self.event_data_for_client = None
             done = True
-                                    
-        
-        observation = self.event_data_for_client                              
+
+
+        observation = self.event_data_for_client
         return observation, reward, done, info

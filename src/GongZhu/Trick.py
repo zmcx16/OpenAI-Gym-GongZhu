@@ -33,7 +33,7 @@ class Trick:
         if self.cardsInTrick == 0: # if this is the first card added, set the trick suit
             self.setTrickSuit(card)
             #print ('Current trick suit:', self.suit)
-        
+
         self.trick[index] = card
         self.cardsInTrick += 1
 

@@ -25,7 +25,7 @@ class RandomAI:
         elif observation['event_name'] == 'PlayTrick':
             if self.print_info:
                 print(observation)
-            
+
             choose_card = random.choice(observation['data']['hand'])
             if self.print_info:
                 print(self.name, ' choose card: ', choose_card)
@@ -33,10 +33,10 @@ class RandomAI:
             return {
                     "event_name" : "PlayTrick_Action",
                     "data" : {
-                        'playerName': self.name, 
+                        'playerName': self.name,
                         'action': {'card': choose_card}
                     }
-                }            
+                }
         elif observation['event_name'] == 'ShowTrickAction':
             if self.print_info:
                 print(observation)

@@ -75,10 +75,9 @@ class Suit:
 
 
 
-'''
-Ranks indicated by numbers 2-14, 2-Ace
-Where ace is high and two is low
-'''
+
+"""Ranks indicated by numbers 2-14, 2-Ace"""
+"""Where ace is high and two is low"""
 class Rank:
     def __init__(self, rank):
         self.rank = rank

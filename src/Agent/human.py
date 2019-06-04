@@ -6,23 +6,21 @@ class Human:
         if observation['event_name'] == 'GameStart':
             print(observation)
         elif observation['event_name'] == 'NewRound':
-            print(observation)        
+            print(observation)
         elif observation['event_name'] == 'ShowPlayerHand':
             print(observation)
-        
         elif observation['event_name'] == 'PlayTrick':
             print(observation)
             
-            hand = observation['data']['hand']
             choose_card = input('choose card: ')
             
             return {
                     "event_name" : "PlayTrick_Action",
                     "data" : {
-                        'playerName': self.name, 
+                        'playerName': self.name,
                         'action': {'card': choose_card}
                     }
-                }            
+                }
         elif observation['event_name'] == 'ShowTrickAction':
             print(observation)
         elif observation['event_name'] == 'ShowTrickEnd':

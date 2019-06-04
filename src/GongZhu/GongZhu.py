@@ -1,5 +1,5 @@
 from .Deck import Deck
-from .Card import Card, Suit, Rank
+from .Card import Card, Suit
 from .Player import Player
 from .Trick import Trick
 from .CommonDef import *
@@ -90,9 +90,9 @@ class GongZhuEnv(Env):
         hearts_score_list[4] = -10
         
         # check shootingMoon and grandSlam
-        for current_player_i in range(len(self.players)): 
+        for current_player_i in range(len(self.players)):
             heart_num = 0
-            for card in self.players[current_player_i].CardsInRound:        
+            for card in self.players[current_player_i].CardsInRound:
                 if card.suit == Suit(hearts):
                     heart_num += 1
                 elif card == Card(queen, spades):
@@ -517,7 +517,7 @@ class GongZhuEnv(Env):
             
         elif self.event == 'GameOver':
             self._event_GameOver()
-        
+
         elif self.event == None:
             self.event_data_for_client = None
             done = True

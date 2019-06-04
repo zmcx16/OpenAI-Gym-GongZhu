@@ -16,7 +16,7 @@ class Hand:
         self.hearts = []
         
         # create hand of cards split up by suit
-        self.hand = [self.clubs, self.diamonds, 
+        self.hand = [self.clubs, self.diamonds,
                     self.spades, self.hearts]
 
         self.contains2ofclubs = False
@@ -102,10 +102,10 @@ class Hand:
         for card in self.hand[suitIden]:
             if card.rank.rank == cardRank:
                 cardToPlay = card
-                    
+
                 # remove cardToPlay from hand
                 # self.hand[suitIden].remove(card)
-                
+
                 # update hand representation
                 # self.updateHand()
                 return cardToPlay

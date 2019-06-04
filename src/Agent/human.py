@@ -13,7 +13,7 @@ class Human:
             print(observation)
             
             choose_card = input('choose card: ')
-            
+
             return {
                     "event_name" : "PlayTrick_Action",
                     "data" : {

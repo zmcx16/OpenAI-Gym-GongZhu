@@ -1,4 +1,4 @@
-from .Card import Card, Suit
+from .Card import Suit
 
 hearts = 3 # the corresponding index to the suit hearts
 spades = 2

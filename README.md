@@ -1,4 +1,6 @@
 # OpenAI Gym GongZhu Card Game
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9779d56fea3c4fc7aa03b4c783ae0f17)](https://www.codacy.com/app/zmcx16/OpenAI-Gym-GongZhu?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zmcx16/OpenAI-Gym-GongZhu&amp;utm_campaign=Badge_Grade)
+
 * Implement an OpenAI Gym GongZhu Card Game simulation environment, easy to collect game data to use it in Machine Learning and Reinforcement Learning, the main game logic is fork from https://github.com/danielcorin/Hearts.
 
 # Requirement
